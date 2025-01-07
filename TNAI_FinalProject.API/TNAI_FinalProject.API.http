@@ -1,0 +1,6 @@
+@TNAI_FinalProject.API_HostAddress = http://localhost:5134
+
+GET {{TNAI_FinalProject.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
