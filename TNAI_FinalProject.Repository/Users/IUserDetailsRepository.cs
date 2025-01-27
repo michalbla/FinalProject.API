@@ -13,5 +13,6 @@ namespace TNAI_FinalProject.Repository.Users
         Task<List<UserDetails>> GetAllUsersDetailsAsync();
         Task<bool> SaveUserDetailsAsync(UserDetails userDetails);
         Task<bool> DeleteUserDetailsAsync(int id);
+
     }
 }

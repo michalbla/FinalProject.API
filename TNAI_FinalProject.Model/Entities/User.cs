@@ -13,11 +13,14 @@ namespace TNAI_FinalProject.Model.Entities
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         //public DateTime? DateOfBirth { get; set; }
-        public string? PasswordHash { get; set; }
+        public string? PasswordHash { get; set; }   //zahashowane
         public int RoleId { get; set; }
+        public int AdminId { get; set; }
 
         public virtual RoleUser Role { get; set; }
 
         public virtual ICollection<UserDetails> Details { get; set; }
+
+        public virtual Admin admin { get; set; }
     }
 }

@@ -18,5 +18,7 @@ namespace TNAI_FinalProject.Model.Entities
         public int UserId { get; set; }
 
         public virtual User User { get; set; }
+
+        public ICollection<Admin> Admins { get; set;}
     }
 }

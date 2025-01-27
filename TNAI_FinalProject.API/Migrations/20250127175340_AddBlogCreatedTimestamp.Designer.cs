@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TNAI_FinalProject.Model;
 
@@ -11,9 +12,11 @@ using TNAI_FinalProject.Model;
 namespace TNAI_FinalProject.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250127175340_AddBlogCreatedTimestamp")]
+    partial class AddBlogCreatedTimestamp
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,21 +24,6 @@ namespace TNAI_FinalProject.API.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("AdminUserDetails", b =>
-                {
-                    b.Property<int>("Admin_DetailsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("AdminsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Admin_DetailsId", "AdminsId");
-
-                    b.HasIndex("AdminsId");
-
-                    b.ToTable("AdminUserDetails");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -235,26 +223,6 @@ namespace TNAI_FinalProject.API.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TNAI_FinalProject.Model.Entities.Admin", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Admins");
-                });
-
             modelBuilder.Entity("TNAI_FinalProject.Model.Entities.RoleUser", b =>
                 {
                     b.Property<int>("Id")
@@ -281,9 +249,6 @@ namespace TNAI_FinalProject.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdminId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -304,8 +269,6 @@ namespace TNAI_FinalProject.API.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AdminId");
 
                     b.HasIndex("RoleId");
 
@@ -350,21 +313,6 @@ namespace TNAI_FinalProject.API.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserDetails");
-                });
-
-            modelBuilder.Entity("AdminUserDetails", b =>
-                {
-                    b.HasOne("TNAI_FinalProject.Model.Entities.UserDetails", null)
-                        .WithMany()
-                        .HasForeignKey("Admin_DetailsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("TNAI_FinalProject.Model.Entities.Admin", null)
-                        .WithMany()
-                        .HasForeignKey("AdminsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -420,12 +368,6 @@ namespace TNAI_FinalProject.API.Migrations
 
             modelBuilder.Entity("TNAI_FinalProject.Model.Entities.User", b =>
                 {
-                    b.HasOne("TNAI_FinalProject.Model.Entities.Admin", "admin")
-                        .WithMany("Admin_Users")
-                        .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("TNAI_FinalProject.Model.Entities.RoleUser", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
@@ -433,8 +375,6 @@ namespace TNAI_FinalProject.API.Migrations
                         .IsRequired();
 
                     b.Navigation("Role");
-
-                    b.Navigation("admin");
                 });
 
             modelBuilder.Entity("TNAI_FinalProject.Model.Entities.UserDetails", b =>
@@ -446,11 +386,6 @@ namespace TNAI_FinalProject.API.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("TNAI_FinalProject.Model.Entities.Admin", b =>
-                {
-                    b.Navigation("Admin_Users");
                 });
 
             modelBuilder.Entity("TNAI_FinalProject.Model.Entities.RoleUser", b =>
