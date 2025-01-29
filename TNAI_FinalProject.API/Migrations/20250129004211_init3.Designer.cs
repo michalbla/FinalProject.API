@@ -12,8 +12,8 @@ using TNAI_FinalProject.Model;
 namespace TNAI_FinalProject.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250127215951_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20250129004211_init3")]
+    partial class init3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -284,7 +284,7 @@ namespace TNAI_FinalProject.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdminId")
+                    b.Property<int?>("AdminId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -426,8 +426,7 @@ namespace TNAI_FinalProject.API.Migrations
                     b.HasOne("TNAI_FinalProject.Model.Entities.Admin", "admin")
                         .WithMany("Admin_Users")
                         .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("TNAI_FinalProject.Model.Entities.RoleUser", "Role")
                         .WithMany("Users")

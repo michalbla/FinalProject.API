@@ -78,12 +78,18 @@ namespace TNAI_FinalProject.Repository.Admins
             if (admin == null)
                 return false;
 
-            bool NotInList = false;
+            bool NotInList = true;
 
-            foreach (var u in admin.Admin_Users)
+            if (admin.Admin_Users == null)
             {
-                if (u.Id == user.Id)
-                    NotInList = true;
+                NotInList = true;
+            }
+            else
+            {
+                if (admin.Admin_Users.Any(u => u.Id == user.Id))
+                {
+                    NotInList = false;
+                }
             }
 
             return NotInList;
@@ -99,8 +105,6 @@ namespace TNAI_FinalProject.Repository.Admins
             bool exist = await CheckUserAdminAsync(id, user);
 
             if (exist)
-                return false;
-            else
             {
 
                 admin.Admin_Users.Add(user);
@@ -115,6 +119,11 @@ namespace TNAI_FinalProject.Repository.Admins
                 }
 
                 return true;
+            }
+    
+            else
+            {
+                return false;
             }
         }
 
@@ -131,6 +140,10 @@ namespace TNAI_FinalProject.Repository.Admins
 
             if (exists)
             {
+                return false;
+            }
+            else
+            {
                 admin.Admin_Users.Remove(user);
 
                 try
@@ -143,10 +156,7 @@ namespace TNAI_FinalProject.Repository.Admins
                 }
 
                 return true;
-            }
-            else
-            {
-                return false;
+               
             }
 
         }
@@ -181,6 +191,19 @@ namespace TNAI_FinalProject.Repository.Admins
             }  
 
 
+        }
+
+        public async Task<List<User>> GetAllAdminUsersAsync(int id)
+        {
+            var admin = await GetAdminByIdAsync(id);
+
+            if (admin == null) throw new InvalidOperationException("Administrator do not exists");
+
+
+            if (admin.Admin_Users == null)
+                return new List<User>();
+
+            return admin.Admin_Users.ToList();
         }
 
     }

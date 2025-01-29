@@ -9,5 +9,6 @@ namespace TNAI_FinalProject.Repository.Users
         Task<bool> SaveUserAsync(User user);
         Task<bool> DeleteUserAsync(int id);
         Task<bool> EmailExistAsync(string email);
+        Task<User?>GetUserByEmailAsync(string email);
     }
 }

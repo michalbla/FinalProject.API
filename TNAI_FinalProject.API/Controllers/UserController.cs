@@ -133,5 +133,21 @@ namespace TNAI_FinalProject.API.Controllers
             if (!result) throw new Exception("Error deleting user");
             return Ok();
         }
+
+        [HttpGet("by-email/{email}")]
+        public async Task<IActionResult> GetByEmail(string email)
+        {
+            var existingUser = await _userRepository.GetUserByEmailAsync(email);
+
+            if (existingUser == null) return NotFound(new { Message = "User not found" });
+
+            return Ok(new
+            {
+                name = existingUser.FirstName,
+                lastName = existingUser.LastName,
+                email = existingUser.Email,
+                roleName = existingUser.Role?.Name,
+            });
+        }
     }
 }

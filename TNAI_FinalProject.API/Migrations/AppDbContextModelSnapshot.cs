@@ -281,7 +281,7 @@ namespace TNAI_FinalProject.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("AdminId")
+                    b.Property<int?>("AdminId")
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
@@ -423,8 +423,7 @@ namespace TNAI_FinalProject.API.Migrations
                     b.HasOne("TNAI_FinalProject.Model.Entities.Admin", "admin")
                         .WithMany("Admin_Users")
                         .HasForeignKey("AdminId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("TNAI_FinalProject.Model.Entities.RoleUser", "Role")
                         .WithMany("Users")

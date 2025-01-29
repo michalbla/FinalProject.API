@@ -9,6 +9,7 @@ using TNAI_FinalProject.Model;
 using TNAI_FinalProject.Model.Dtos.UserDto;
 using TNAI_FinalProject.Model.Entities;
 using TNAI_FinalProject.Repository.Users;
+using TNAI_FinalProject.Repository.Admins;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,14 +31,21 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("AppDbContext");
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("TNAI_FinalProject.API")));
 
+
+
 // Add services to the container.
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 builder.Services.AddScoped<IValidator<RegisterInputUserDto>, RegisterUserDtoValidator>();
-
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+//builder.Services.AddScoped<>
 
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

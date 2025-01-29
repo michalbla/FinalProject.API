@@ -12,7 +12,7 @@ namespace TNAI_FinalProject.Model.Entities
         public string? Name { get; set; }
         public string? PasswordHash { get; set; }   //zahashowane
 
-        public virtual ICollection<User> Admin_Users { get; set; }
+        public virtual ICollection<User> Admin_Users { get; set; } = new List<User>();
 
         public virtual ICollection<UserDetails> Admin_Details { get; set; }
 

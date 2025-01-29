@@ -5,7 +5,7 @@
 namespace TNAI_FinalProject.API.Migrations
 {
     /// <inheritdoc />
-    public partial class AddBlogCreatedTimestamp : Migration
+    public partial class init4 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

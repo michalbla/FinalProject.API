@@ -69,5 +69,12 @@ namespace TNAI_FinalProject.Repository.Users
         {
             return await DbContext.Users.AnyAsync(x => x.Email == email);
         }
+
+        public async Task<User?> GetUserByEmailAsync(string email)
+        {
+            var user = await DbContext.Users.Include(x => x.Role).SingleOrDefaultAsync(x => x.Email == email);
+
+            return user;
+        }
     }
 }

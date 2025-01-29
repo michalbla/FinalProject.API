@@ -15,7 +15,7 @@ namespace TNAI_FinalProject.Model.Entities
         //public DateTime? DateOfBirth { get; set; }
         public string? PasswordHash { get; set; }   //zahashowane
         public int RoleId { get; set; }
-        public int AdminId { get; set; }
+        public int? AdminId { get; set; }
 
         public virtual RoleUser Role { get; set; }
 

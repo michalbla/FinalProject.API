@@ -16,7 +16,8 @@ namespace TNAI_FinalProject.Repository.Admins
         Task<bool> CheckUserAdminAsync(int id, User user);
         Task<bool> AddUserToAdminAsync(int  id, User user);
         Task<bool> RemoveUserFromAdminAsync(int id, User user);
-        //Task<bool> GetDetailsAsync(int id); do zobaczenia UserDetails
+        //Task<bool> GetDetailsAsync(int id); do przemyslenia-> UserDetails
         Task<bool> ChangeUserRoleAsync(int id, User user, RoleUser role);
+        Task<List<User>> GetAllAdminUsersAsync(int id);
     }
 }
