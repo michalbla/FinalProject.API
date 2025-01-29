@@ -7,7 +7,7 @@ using TNAI_FinalProject.Repository.Admins;
 using FluentValidation;
 using TNAI_FinalProject.Model.Dtos.UserDto;
 using TNAI_FinalProject.Dto.AdminDto;
-//using TNAI_FinalProject.API.Migrations;
+using TNAI_FinalProject.API.Migrations;
 using Microsoft.EntityFrameworkCore;
 using TNAI_FinalProject.Model;
 
